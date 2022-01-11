@@ -131,8 +131,18 @@ function createImage(imageSrc) {
   return image
 }
 
-let platformImage = createImage(platform)
-let platformSmallTallImage = createImage(platformSmallTall)
+function createImageAsync(imageSrc) {
+  return new Promise((resolve) => {
+    const image = new Image()
+    image.onload = () => {
+      resolve(image)
+    }
+    image.src = imageSrc
+  })
+}
+
+let platformImage
+let platformSmallTallImage
 
 let player = new Player()
 let platforms = []
@@ -150,8 +160,11 @@ const keys = {
 
 let scrollOffset = 0
 
-function init() {
-  platformImage = createImage(platform)
+async function init() {
+  platformImage = await createImageAsync(platform)
+  platformSmallTallImage = await createImageAsync(platformSmallTall)
+
+  console.log(platformSmallTallImage.width)
 
   player = new Player()
   platforms = [
@@ -303,7 +316,7 @@ function animate() {
   }
 
   // win condition
-  if (scrollOffset > platformImage.width * 5 + 300 - 2) {
+  if (platformImage && scrollOffset > platformImage.width * 5 + 300 - 2) {
     console.log('you win')
   }
 
