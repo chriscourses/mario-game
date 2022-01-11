@@ -8,6 +8,8 @@ import spriteRunRight from '../img/spriteRunRight.png'
 import spriteStandLeft from '../img/spriteStandLeft.png'
 import spriteStandRight from '../img/spriteStandRight.png'
 
+import spriteGoomba from '../img/spriteGoomba.png'
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -137,16 +139,33 @@ class Goomba {
       y: velocity.y
     }
 
-    this.width = 50
+    this.width = 43.33
     this.height = 50
+
+    this.image = createImage(spriteGoomba)
+    this.frames = 0
   }
 
   draw() {
-    c.fillStyle = 'red'
-    c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    // c.fillStyle = 'red'
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+    c.drawImage(
+      this.image,
+      130 * this.frames,
+      0,
+      130,
+      150,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    )
   }
 
   update() {
+    this.frames++
+    if (this.frames >= 58) this.frames = 0
     this.draw()
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y

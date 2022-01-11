@@ -1009,6 +1009,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/spriteGoomba.png":
+/*!**********************************!*\
+  !*** ./src/img/spriteGoomba.png ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a1de12fbeda5f4cadc1c0cec27c01014.png");
+
+/***/ }),
+
 /***/ "./src/img/spriteRunLeft.png":
 /*!***********************************!*\
   !*** ./src/img/spriteRunLeft.png ***!
@@ -1086,6 +1099,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
 /* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
 /* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
+/* harmony import */ var _img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../img/spriteGoomba.png */ "./src/img/spriteGoomba.png");
+
 
 
 
@@ -1228,19 +1243,24 @@ var Goomba = /*#__PURE__*/function () {
       x: velocity.x,
       y: velocity.y
     };
-    this.width = 50;
+    this.width = 43.33;
     this.height = 50;
+    this.image = createImage(_img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_12__["default"]);
+    this.frames = 0;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Goomba, [{
     key: "draw",
     value: function draw() {
-      c.fillStyle = 'red';
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      // c.fillStyle = 'red'
+      // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+      c.drawImage(this.image, 130 * this.frames, 0, 130, 150, this.position.x, this.position.y, this.width, this.height);
     }
   }, {
     key: "update",
     value: function update() {
+      this.frames++;
+      if (this.frames >= 58) this.frames = 0;
       this.draw();
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
