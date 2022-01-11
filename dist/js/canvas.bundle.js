@@ -1213,6 +1213,44 @@ var GenericObject = /*#__PURE__*/function () {
   return GenericObject;
 }();
 
+var Goomba = /*#__PURE__*/function () {
+  function Goomba(_ref3) {
+    var position = _ref3.position,
+        velocity = _ref3.velocity;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, Goomba);
+
+    this.position = {
+      x: position.x,
+      y: position.y
+    };
+    this.velocity = {
+      x: velocity.x,
+      y: velocity.y
+    };
+    this.width = 50;
+    this.height = 50;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Goomba, [{
+    key: "draw",
+    value: function draw() {
+      c.fillStyle = 'red';
+      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.draw();
+      this.position.x += this.velocity.x;
+      this.position.y += this.velocity.y;
+      if (this.position.y + this.height + this.velocity.y <= canvas.height) this.velocity.y += gravity;
+    }
+  }]);
+
+  return Goomba;
+}();
+
 function createImage(imageSrc) {
   var image = new Image();
   image.src = imageSrc;
@@ -1236,6 +1274,7 @@ var platformSmallTallImage;
 var player = new Player();
 var platforms = [];
 var genericObjects = [];
+var goombas = [];
 var lastKey;
 var keys = {
   right: {
@@ -1246,6 +1285,18 @@ var keys = {
   }
 };
 var scrollOffset = 0;
+
+function isOnTopOfPlatform(_ref4) {
+  var object = _ref4.object,
+      platform = _ref4.platform;
+  return object.position.y + object.height <= platform.position.y && object.position.y + object.height + object.velocity.y >= platform.position.y && object.position.x + object.width >= platform.position.x && object.position.x <= platform.position.x + platform.width;
+}
+
+function collisionTop(_ref5) {
+  var object1 = _ref5.object1,
+      object2 = _ref5.object2;
+  return object1.position.y + object1.height <= object2.position.y && object1.position.y + object1.height + object1.velocity.y >= object2.position.y && object1.position.x + object1.width >= object2.position.x && object1.position.x <= object2.position.x + object2.width;
+}
 
 function init() {
   return _init.apply(this, arguments);
@@ -1267,8 +1318,17 @@ function _init() {
 
           case 5:
             platformSmallTallImage = _context.sent;
-            console.log(platformSmallTallImage.width);
             player = new Player();
+            goombas = [new Goomba({
+              position: {
+                x: 800,
+                y: 100
+              },
+              velocity: {
+                x: -0.3,
+                y: 0
+              }
+            })];
             platforms = [new Platform({
               x: platformImage.width * 4 + 300 - 2 + platformImage.width - platformSmallTallImage.width,
               y: 270,
@@ -1329,6 +1389,19 @@ function animate() {
   platforms.forEach(function (platform) {
     platform.draw();
   });
+  goombas.forEach(function (goomba, index) {
+    goomba.update();
+
+    if (collisionTop({
+      object1: player,
+      object2: goomba
+    })) {
+      player.velocity.y -= 40;
+      setTimeout(function () {
+        goombas.splice(index, 1);
+      }, 0);
+    } else if (player.position.x + player.width >= goomba.position.x && player.position.y + player.height >= goomba.position.y && player.position.x <= goomba.position.x + goomba.width) init();
+  });
   player.update();
 
   if (keys.right.pressed && player.position.x < 400) {
@@ -1336,7 +1409,7 @@ function animate() {
   } else if (keys.left.pressed && player.position.x > 100 || keys.left.pressed && scrollOffset === 0 && player.position.x > 0) {
     player.velocity.x = -player.speed;
   } else {
-    player.velocity.x = 0;
+    player.velocity.x = 0; // scrolling code
 
     if (keys.right.pressed) {
       scrollOffset += player.speed;
@@ -1346,6 +1419,9 @@ function animate() {
       genericObjects.forEach(function (genericObject) {
         genericObject.position.x -= player.speed * 0.66;
       });
+      goombas.forEach(function (goomba) {
+        goomba.position.x -= player.speed;
+      });
     } else if (keys.left.pressed && scrollOffset > 0) {
       scrollOffset -= player.speed;
       platforms.forEach(function (platform) {
@@ -1354,14 +1430,27 @@ function animate() {
       genericObjects.forEach(function (genericObject) {
         genericObject.position.x += player.speed * 0.66;
       });
+      goombas.forEach(function (goomba) {
+        goomba.position.x += player.speed;
+      });
     }
   } // platform collision detection
 
 
   platforms.forEach(function (platform) {
-    if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+    if (isOnTopOfPlatform({
+      object: player,
+      platform: platform
+    })) {
       player.velocity.y = 0;
     }
+
+    goombas.forEach(function (goomba) {
+      if (isOnTopOfPlatform({
+        object: goomba,
+        platform: platform
+      })) goomba.velocity.y = 0;
+    });
   }); // sprite switching
 
   if (keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.right) {
@@ -1396,8 +1485,8 @@ function animate() {
 
 init();
 animate();
-addEventListener('keydown', function (_ref3) {
-  var keyCode = _ref3.keyCode;
+addEventListener('keydown', function (_ref6) {
+  var keyCode = _ref6.keyCode;
 
   // console.log(keyCode)
   switch (keyCode) {
@@ -1423,8 +1512,8 @@ addEventListener('keydown', function (_ref3) {
       break;
   }
 });
-addEventListener('keyup', function (_ref4) {
-  var keyCode = _ref4.keyCode;
+addEventListener('keyup', function (_ref7) {
+  var keyCode = _ref7.keyCode;
 
   // console.log(keyCode)
   switch (keyCode) {

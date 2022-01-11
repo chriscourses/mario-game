@@ -125,6 +125,37 @@ class GenericObject {
   }
 }
 
+class Goomba {
+  constructor({ position, velocity }) {
+    this.position = {
+      x: position.x,
+      y: position.y
+    }
+
+    this.velocity = {
+      x: velocity.x,
+      y: velocity.y
+    }
+
+    this.width = 50
+    this.height = 50
+  }
+
+  draw() {
+    c.fillStyle = 'red'
+    c.fillRect(this.position.x, this.position.y, this.width, this.height)
+  }
+
+  update() {
+    this.draw()
+    this.position.x += this.velocity.x
+    this.position.y += this.velocity.y
+
+    if (this.position.y + this.height + this.velocity.y <= canvas.height)
+      this.velocity.y += gravity
+  }
+}
+
 function createImage(imageSrc) {
   const image = new Image()
   image.src = imageSrc
@@ -147,6 +178,7 @@ let platformSmallTallImage
 let player = new Player()
 let platforms = []
 let genericObjects = []
+let goombas = []
 
 let lastKey
 const keys = {
@@ -160,13 +192,43 @@ const keys = {
 
 let scrollOffset = 0
 
+function isOnTopOfPlatform({ object, platform }) {
+  return (
+    object.position.y + object.height <= platform.position.y &&
+    object.position.y + object.height + object.velocity.y >=
+      platform.position.y &&
+    object.position.x + object.width >= platform.position.x &&
+    object.position.x <= platform.position.x + platform.width
+  )
+}
+
+function collisionTop({ object1, object2 }) {
+  return (
+    object1.position.y + object1.height <= object2.position.y &&
+    object1.position.y + object1.height + object1.velocity.y >=
+      object2.position.y &&
+    object1.position.x + object1.width >= object2.position.x &&
+    object1.position.x <= object2.position.x + object2.width
+  )
+}
+
 async function init() {
   platformImage = await createImageAsync(platform)
   platformSmallTallImage = await createImageAsync(platformSmallTall)
 
-  console.log(platformSmallTallImage.width)
-
   player = new Player()
+  goombas = [
+    new Goomba({
+      position: {
+        x: 800,
+        y: 100
+      },
+      velocity: {
+        x: -0.3,
+        y: 0
+      }
+    })
+  ]
   platforms = [
     new Platform({
       x:
@@ -233,6 +295,27 @@ function animate() {
   platforms.forEach((platform) => {
     platform.draw()
   })
+
+  goombas.forEach((goomba, index) => {
+    goomba.update()
+
+    if (
+      collisionTop({
+        object1: player,
+        object2: goomba
+      })
+    ) {
+      player.velocity.y -= 40
+      setTimeout(() => {
+        goombas.splice(index, 1)
+      }, 0)
+    } else if (
+      player.position.x + player.width >= goomba.position.x &&
+      player.position.y + player.height >= goomba.position.y &&
+      player.position.x <= goomba.position.x + goomba.width
+    )
+      init()
+  })
   player.update()
 
   if (keys.right.pressed && player.position.x < 400) {
@@ -245,6 +328,7 @@ function animate() {
   } else {
     player.velocity.x = 0
 
+    // scrolling code
     if (keys.right.pressed) {
       scrollOffset += player.speed
       platforms.forEach((platform) => {
@@ -252,6 +336,10 @@ function animate() {
       })
       genericObjects.forEach((genericObject) => {
         genericObject.position.x -= player.speed * 0.66
+      })
+
+      goombas.forEach((goomba) => {
+        goomba.position.x -= player.speed
       })
     } else if (keys.left.pressed && scrollOffset > 0) {
       scrollOffset -= player.speed
@@ -263,20 +351,33 @@ function animate() {
       genericObjects.forEach((genericObject) => {
         genericObject.position.x += player.speed * 0.66
       })
+
+      goombas.forEach((goomba) => {
+        goomba.position.x += player.speed
+      })
     }
   }
 
   // platform collision detection
   platforms.forEach((platform) => {
     if (
-      player.position.y + player.height <= platform.position.y &&
-      player.position.y + player.height + player.velocity.y >=
-        platform.position.y &&
-      player.position.x + player.width >= platform.position.x &&
-      player.position.x <= platform.position.x + platform.width
+      isOnTopOfPlatform({
+        object: player,
+        platform
+      })
     ) {
       player.velocity.y = 0
     }
+
+    goombas.forEach((goomba) => {
+      if (
+        isOnTopOfPlatform({
+          object: goomba,
+          platform
+        })
+      )
+        goomba.velocity.y = 0
+    })
   })
 
   // sprite switching
