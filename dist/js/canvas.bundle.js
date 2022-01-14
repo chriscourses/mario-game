@@ -1022,6 +1022,84 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/spriteMarioJumpLeft.png":
+/*!*****************************************!*\
+  !*** ./src/img/spriteMarioJumpLeft.png ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "79a87181aec94b5e1d21942963ebe634.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteMarioJumpRight.png":
+/*!******************************************!*\
+  !*** ./src/img/spriteMarioJumpRight.png ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "ffdd5958ac8fc0192de1a8855d128203.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteMarioRunLeft.png":
+/*!****************************************!*\
+  !*** ./src/img/spriteMarioRunLeft.png ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "bd67564ba49a9b4944f1ac5c812adc9d.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteMarioRunRight.png":
+/*!*****************************************!*\
+  !*** ./src/img/spriteMarioRunRight.png ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "0a0b6df309febe5e8b6c74c066c6a08e.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteMarioStandLeft.png":
+/*!******************************************!*\
+  !*** ./src/img/spriteMarioStandLeft.png ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "5278df33f538bbd50783473847521409.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteMarioStandRight.png":
+/*!*******************************************!*\
+  !*** ./src/img/spriteMarioStandRight.png ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "5a31f024f6d43f2604bafd029981127f.png");
+
+/***/ }),
+
 /***/ "./src/img/spriteRunLeft.png":
 /*!***********************************!*\
   !*** ./src/img/spriteRunLeft.png ***!
@@ -1099,7 +1177,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
 /* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
 /* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
-/* harmony import */ var _img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../img/spriteGoomba.png */ "./src/img/spriteGoomba.png");
+/* harmony import */ var _img_spriteMarioRunLeft_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../img/spriteMarioRunLeft.png */ "./src/img/spriteMarioRunLeft.png");
+/* harmony import */ var _img_spriteMarioRunRight_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../img/spriteMarioRunRight.png */ "./src/img/spriteMarioRunRight.png");
+/* harmony import */ var _img_spriteMarioStandLeft_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../img/spriteMarioStandLeft.png */ "./src/img/spriteMarioStandLeft.png");
+/* harmony import */ var _img_spriteMarioStandRight_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../img/spriteMarioStandRight.png */ "./src/img/spriteMarioStandRight.png");
+/* harmony import */ var _img_spriteMarioJumpRight_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../img/spriteMarioJumpRight.png */ "./src/img/spriteMarioJumpRight.png");
+/* harmony import */ var _img_spriteMarioJumpLeft_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../img/spriteMarioJumpLeft.png */ "./src/img/spriteMarioJumpLeft.png");
+/* harmony import */ var _img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../img/spriteGoomba.png */ "./src/img/spriteGoomba.png");
+
+
+
+
+
+
 
 
 
@@ -1132,38 +1222,45 @@ var Player = /*#__PURE__*/function () {
       x: 0,
       y: 0
     };
-    this.width = 66;
-    this.height = 150;
+    this.scale = 0.3;
+    this.width = 398 * this.scale;
+    this.height = 353 * this.scale;
     this.image = createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_11__["default"]);
     this.frames = 0;
     this.sprites = {
       stand: {
-        right: createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_11__["default"]),
-        left: createImage(_img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_10__["default"]),
-        cropWidth: 177,
-        width: 66
+        right: createImage(_img_spriteMarioStandRight_png__WEBPACK_IMPORTED_MODULE_15__["default"]),
+        left: createImage(_img_spriteMarioStandLeft_png__WEBPACK_IMPORTED_MODULE_14__["default"]),
+        cropWidth: 398,
+        width: 398 * this.scale
       },
       run: {
-        right: createImage(_img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_9__["default"]),
-        left: createImage(_img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_8__["default"]),
-        cropWidth: 341,
-        width: 127.875
+        right: createImage(_img_spriteMarioRunRight_png__WEBPACK_IMPORTED_MODULE_13__["default"]),
+        left: createImage(_img_spriteMarioRunLeft_png__WEBPACK_IMPORTED_MODULE_12__["default"]),
+        cropWidth: 398,
+        width: 398 * this.scale
+      },
+      jump: {
+        right: createImage(_img_spriteMarioJumpRight_png__WEBPACK_IMPORTED_MODULE_16__["default"]),
+        left: createImage(_img_spriteMarioJumpLeft_png__WEBPACK_IMPORTED_MODULE_17__["default"]),
+        cropWidth: 398,
+        width: 398 * this.scale
       }
     };
     this.currentSprite = this.sprites.stand.right;
-    this.currentCropWidth = 177;
+    this.currentCropWidth = this.sprites.stand.cropWidth;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Player, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 400, this.position.x, this.position.y, this.width, this.height);
+      c.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 353, this.position.x, this.position.y, this.width, this.height);
     }
   }, {
     key: "update",
     value: function update() {
       this.frames++;
-      if (this.frames > 59 && (this.currentSprite === this.sprites.stand.right || this.currentSprite === this.sprites.stand.left)) this.frames = 0;else if (this.frames > 29 && (this.currentSprite === this.sprites.run.right || this.currentSprite === this.sprites.run.left)) this.frames = 0;
+      if (this.frames > 58 && (this.currentSprite === this.sprites.stand.right || this.currentSprite === this.sprites.stand.left)) this.frames = 0;else if (this.frames > 28 && (this.currentSprite === this.sprites.run.right || this.currentSprite === this.sprites.run.left)) this.frames = 0;else if (this.currentSprite === this.sprites.jump.right || this.currentSprite === this.sprites.jump.left) this.frames = 0;
       this.draw();
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
@@ -1250,7 +1347,7 @@ var Goomba = /*#__PURE__*/function () {
     };
     this.width = 43.33;
     this.height = 50;
-    this.image = createImage(_img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_12__["default"]);
+    this.image = createImage(_img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_18__["default"]);
     this.frames = 0;
     this.distance = distance;
   }
@@ -1587,23 +1684,25 @@ function animate() {
     });
   }); // sprite switching
 
-  if (keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.right) {
-    player.frames = 1;
-    player.currentSprite = player.sprites.run.right;
-    player.currentCropWidth = player.sprites.run.cropWidth;
-    player.width = player.sprites.run.width;
-  } else if (keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.run.left) {
-    player.currentSprite = player.sprites.run.left;
-    player.currentCropWidth = player.sprites.run.cropWidth;
-    player.width = player.sprites.run.width;
-  } else if (!keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.stand.left) {
-    player.currentSprite = player.sprites.stand.left;
-    player.currentCropWidth = player.sprites.stand.cropWidth;
-    player.width = player.sprites.stand.width;
-  } else if (!keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.stand.right) {
-    player.currentSprite = player.sprites.stand.right;
-    player.currentCropWidth = player.sprites.stand.cropWidth;
-    player.width = player.sprites.stand.width;
+  if (player.velocity.y === 0) {
+    if (keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.right) {
+      player.frames = 1;
+      player.currentSprite = player.sprites.run.right;
+      player.currentCropWidth = player.sprites.run.cropWidth;
+      player.width = player.sprites.run.width;
+    } else if (keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.run.left) {
+      player.currentSprite = player.sprites.run.left;
+      player.currentCropWidth = player.sprites.run.cropWidth;
+      player.width = player.sprites.run.width;
+    } else if (!keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.stand.left) {
+      player.currentSprite = player.sprites.stand.left;
+      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.width = player.sprites.stand.width;
+    } else if (!keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.stand.right) {
+      player.currentSprite = player.sprites.stand.right;
+      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.width = player.sprites.stand.width;
+    }
   } // win condition
 
 
@@ -1643,6 +1742,7 @@ addEventListener('keydown', function (_ref8) {
     case 87:
       console.log('up');
       player.velocity.y -= 25;
+      if (lastKey === 'right') player.currentSprite = player.sprites.jump.right;else player.currentSprite = player.sprites.jump.left;
       break;
   }
 });
