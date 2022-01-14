@@ -1231,7 +1231,12 @@ var GenericObject = /*#__PURE__*/function () {
 var Goomba = /*#__PURE__*/function () {
   function Goomba(_ref3) {
     var position = _ref3.position,
-        velocity = _ref3.velocity;
+        velocity = _ref3.velocity,
+        _ref3$distance = _ref3.distance,
+        distance = _ref3$distance === void 0 ? {
+      limit: 50,
+      traveled: 0
+    } : _ref3$distance;
 
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, Goomba);
 
@@ -1247,6 +1252,7 @@ var Goomba = /*#__PURE__*/function () {
     this.height = 50;
     this.image = createImage(_img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_12__["default"]);
     this.frames = 0;
+    this.distance = distance;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Goomba, [{
@@ -1264,7 +1270,16 @@ var Goomba = /*#__PURE__*/function () {
       this.draw();
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
-      if (this.position.y + this.height + this.velocity.y <= canvas.height) this.velocity.y += gravity;
+      if (this.position.y + this.height + this.velocity.y <= canvas.height) this.velocity.y += gravity; // walk the goomba back and forth
+
+      this.distance.traveled += Math.abs(this.velocity.x);
+
+      if (this.distance.traveled > this.distance.limit) {
+        this.distance.traveled = 0;
+        this.velocity.x = -this.velocity.x;
+      }
+
+      console.log(this.distance.traveled);
     }
   }]);
 
@@ -1392,6 +1407,19 @@ function _init() {
             goombas = [new Goomba({
               position: {
                 x: 800,
+                y: 100
+              },
+              velocity: {
+                x: -0.3,
+                y: 0
+              },
+              distance: {
+                limit: 200,
+                traveled: 0
+              }
+            }), new Goomba({
+              position: {
+                x: 1400,
                 y: 100
               },
               velocity: {
