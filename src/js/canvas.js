@@ -1,7 +1,19 @@
+import {
+  createImage,
+  createImageAsync,
+  isOnTopOfPlatform,
+  collisionTop,
+  isOnTopOfPlatformCircle,
+  hitBottomOfPlatform,
+  hitSideOfPlatform
+} from './utils.js'
+
 import platform from '../img/platform.png'
 import hills from '../img/hills.png'
 import background from '../img/background.png'
 import platformSmallTall from '../img/platformSmallTall.png'
+import block from '../img/block.png'
+import blockTri from '../img/blockTri.png'
 
 import spriteRunLeft from '../img/spriteRunLeft.png'
 import spriteRunRight from '../img/spriteRunRight.png'
@@ -69,6 +81,8 @@ class Player {
   }
 
   draw() {
+    c.fillStyle = 'rgba(255, 0, 0, .2)'
+    c.fillRect(this.position.x, this.position.y, this.width, this.height)
     c.drawImage(
       this.currentSprite,
       this.currentCropWidth * this.frames,
@@ -113,19 +127,35 @@ class Player {
 }
 
 class Platform {
-  constructor({ x, y, image }) {
+  constructor({ x, y, image, block, text }) {
     this.position = {
       x,
       y
     }
 
+    this.velocity = {
+      x: 0
+    }
+
     this.image = image
     this.width = image.width
     this.height = image.height
+    this.block = block
+    this.text = text
   }
 
   draw() {
     c.drawImage(this.image, this.position.x, this.position.y)
+
+    if (this.text) {
+      c.fillStyle = 'red'
+      c.fillText(this.text, this.position.x, this.position.y)
+    }
+  }
+
+  update() {
+    this.draw()
+    this.position.x += this.velocity.x
   }
 }
 
@@ -136,6 +166,10 @@ class GenericObject {
       y
     }
 
+    this.velocity = {
+      x: 0
+    }
+
     this.image = image
     this.width = image.width
     this.height = image.height
@@ -143,6 +177,11 @@ class GenericObject {
 
   draw() {
     c.drawImage(this.image, this.position.x, this.position.y)
+  }
+
+  update() {
+    this.draw()
+    this.position.x += this.velocity.x
   }
 }
 
@@ -208,7 +247,6 @@ class Goomba {
       this.distance.traveled = 0
       this.velocity.x = -this.velocity.x
     }
-    console.log(this.distance.traveled)
   }
 }
 
@@ -247,24 +285,9 @@ class Particle {
   }
 }
 
-function createImage(imageSrc) {
-  const image = new Image()
-  image.src = imageSrc
-  return image
-}
-
-function createImageAsync(imageSrc) {
-  return new Promise((resolve) => {
-    const image = new Image()
-    image.onload = () => {
-      resolve(image)
-    }
-    image.src = imageSrc
-  })
-}
-
 let platformImage
 let platformSmallTallImage
+let blockTriImage
 
 let player = new Player()
 let platforms = []
@@ -284,39 +307,10 @@ const keys = {
 
 let scrollOffset = 0
 
-function isOnTopOfPlatform({ object, platform }) {
-  return (
-    object.position.y + object.height <= platform.position.y &&
-    object.position.y + object.height + object.velocity.y >=
-      platform.position.y &&
-    object.position.x + object.width >= platform.position.x &&
-    object.position.x <= platform.position.x + platform.width
-  )
-}
-
-function collisionTop({ object1, object2 }) {
-  return (
-    object1.position.y + object1.height <= object2.position.y &&
-    object1.position.y + object1.height + object1.velocity.y >=
-      object2.position.y &&
-    object1.position.x + object1.width >= object2.position.x &&
-    object1.position.x <= object2.position.x + object2.width
-  )
-}
-
-function isOnTopOfPlatformCircle({ object, platform }) {
-  return (
-    object.position.y + object.radius <= platform.position.y &&
-    object.position.y + object.radius + object.velocity.y >=
-      platform.position.y &&
-    object.position.x + object.radius >= platform.position.x &&
-    object.position.x <= platform.position.x + platform.width
-  )
-}
-
 async function init() {
   platformImage = await createImageAsync(platform)
   platformSmallTallImage = await createImageAsync(platformSmallTall)
+  blockTriImage = await createImageAsync(blockTri)
 
   player = new Player()
   goombas = [
@@ -366,12 +360,16 @@ async function init() {
     new Platform({
       x: platformImage.width * 2 + 100,
       y: 470,
-      image: platformImage
+      image: platformImage,
+      text: 'here',
+      block: true
     }),
     new Platform({
       x: platformImage.width * 3 + 300,
       y: 470,
-      image: platformImage
+      image: platformImage,
+      text: 'here',
+      block: true
     }),
     new Platform({
       x: platformImage.width * 4 + 300 - 2,
@@ -381,7 +379,15 @@ async function init() {
     new Platform({
       x: platformImage.width * 5 + 700 - 2,
       y: 470,
-      image: platformImage
+      image: platformImage,
+      text: 'here',
+      block: true
+    }),
+    new Platform({
+      x: 850,
+      y: 270,
+      image: blockTriImage,
+      block: true
     })
   ]
   genericObjects = [
@@ -406,11 +412,13 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height)
 
   genericObjects.forEach((genericObject) => {
-    genericObject.draw()
+    genericObject.update()
+    genericObject.velocity.x = 0
   })
 
   platforms.forEach((platform) => {
-    platform.draw()
+    platform.update()
+    platform.velocity.x = 0
   })
 
   goombas.forEach((goomba, index) => {
@@ -455,6 +463,8 @@ function animate() {
   })
   player.update()
 
+  let hitSide = false
+
   if (keys.right.pressed && player.position.x < 400) {
     player.velocity.x = player.speed
   } else if (
@@ -467,39 +477,76 @@ function animate() {
 
     // scrolling code
     if (keys.right.pressed) {
-      scrollOffset += player.speed
-      platforms.forEach((platform) => {
-        platform.position.x -= player.speed
-      })
-      genericObjects.forEach((genericObject) => {
-        genericObject.position.x -= player.speed * 0.66
-      })
+      for (let i = 0; i < platforms.length; i++) {
+        const platform = platforms[i]
+        platform.velocity.x = -player.speed
 
-      goombas.forEach((goomba) => {
-        goomba.position.x -= player.speed
-      })
+        if (
+          platform.block &&
+          hitSideOfPlatform({
+            object: player,
+            platform
+          })
+        ) {
+          platforms.forEach((platform) => {
+            platform.velocity.x = 0
+          })
 
-      particles.forEach((particle) => {
-        particle.position.x -= player.speed
-      })
+          hitSide = true
+          break
+        }
+      }
+
+      if (!hitSide) {
+        scrollOffset += player.speed
+
+        genericObjects.forEach((genericObject) => {
+          genericObject.velocity.x = -player.speed * 0.66
+        })
+
+        goombas.forEach((goomba) => {
+          goomba.position.x -= player.speed
+        })
+
+        particles.forEach((particle) => {
+          particle.position.x -= player.speed
+        })
+      }
     } else if (keys.left.pressed && scrollOffset > 0) {
-      scrollOffset -= player.speed
+      for (let i = 0; i < platforms.length; i++) {
+        const platform = platforms[i]
+        platform.velocity.x = player.speed
 
-      platforms.forEach((platform) => {
-        platform.position.x += player.speed
-      })
+        if (
+          platform.block &&
+          hitSideOfPlatform({
+            object: player,
+            platform
+          })
+        ) {
+          platforms.forEach((platform) => {
+            platform.velocity.x = 0
+          })
 
-      genericObjects.forEach((genericObject) => {
-        genericObject.position.x += player.speed * 0.66
-      })
+          hitSide = true
+          break
+        }
+      }
 
-      goombas.forEach((goomba) => {
-        goomba.position.x += player.speed
-      })
+      if (!hitSide) {
+        scrollOffset -= player.speed
+        genericObjects.forEach((genericObject) => {
+          genericObject.velocity.x = player.speed * 0.66
+        })
 
-      particles.forEach((particle) => {
-        particle.position.x += player.speed
-      })
+        goombas.forEach((goomba) => {
+          goomba.position.x += player.speed
+        })
+
+        particles.forEach((particle) => {
+          particle.position.x += player.speed
+        })
+      }
     }
   }
 
@@ -512,6 +559,26 @@ function animate() {
       })
     ) {
       player.velocity.y = 0
+    }
+
+    if (
+      platform.block &&
+      hitBottomOfPlatform({
+        object: player,
+        platform
+      })
+    ) {
+      player.velocity.y = -player.velocity.y
+    }
+
+    if (
+      platform.block &&
+      hitSideOfPlatform({
+        object: player,
+        platform
+      })
+    ) {
+      player.velocity.x = 0
     }
 
     // particles bounce
