@@ -1035,6 +1035,97 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/spriteFireFlower.png":
+/*!**************************************!*\
+  !*** ./src/img/spriteFireFlower.png ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "434554c25d0262d9ae16c700febfa462.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteFireFlowerJumpLeft.png":
+/*!**********************************************!*\
+  !*** ./src/img/spriteFireFlowerJumpLeft.png ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "fe7f83abbc33795c55d5bbab3ab117f3.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteFireFlowerJumpRight.png":
+/*!***********************************************!*\
+  !*** ./src/img/spriteFireFlowerJumpRight.png ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "b5b7bdebff9886acfe07b077e9357d84.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteFireFlowerRunLeft.png":
+/*!*********************************************!*\
+  !*** ./src/img/spriteFireFlowerRunLeft.png ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "dac857eaeda937793a54db5301b14e46.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteFireFlowerRunRight.png":
+/*!**********************************************!*\
+  !*** ./src/img/spriteFireFlowerRunRight.png ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c957f14ac99dfa4f90a424a042a43e7b.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteFireFlowerStandLeft.png":
+/*!***********************************************!*\
+  !*** ./src/img/spriteFireFlowerStandLeft.png ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "078c954a7e3c7b68639b3a5fbe448e8e.png");
+
+/***/ }),
+
+/***/ "./src/img/spriteFireFlowerStandRight.png":
+/*!************************************************!*\
+  !*** ./src/img/spriteFireFlowerStandRight.png ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "9c8c09ed0463034dc3480fc1eb36234b.png");
+
+/***/ }),
+
 /***/ "./src/img/spriteGoomba.png":
 /*!**********************************!*\
   !*** ./src/img/spriteGoomba.png ***!
@@ -1212,7 +1303,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_spriteMarioStandRight_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../img/spriteMarioStandRight.png */ "./src/img/spriteMarioStandRight.png");
 /* harmony import */ var _img_spriteMarioJumpRight_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../img/spriteMarioJumpRight.png */ "./src/img/spriteMarioJumpRight.png");
 /* harmony import */ var _img_spriteMarioJumpLeft_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../img/spriteMarioJumpLeft.png */ "./src/img/spriteMarioJumpLeft.png");
-/* harmony import */ var _img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../img/spriteGoomba.png */ "./src/img/spriteGoomba.png");
+/* harmony import */ var _img_spriteFireFlowerRunRight_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../img/spriteFireFlowerRunRight.png */ "./src/img/spriteFireFlowerRunRight.png");
+/* harmony import */ var _img_spriteFireFlowerRunLeft_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../img/spriteFireFlowerRunLeft.png */ "./src/img/spriteFireFlowerRunLeft.png");
+/* harmony import */ var _img_spriteFireFlowerStandRight_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../img/spriteFireFlowerStandRight.png */ "./src/img/spriteFireFlowerStandRight.png");
+/* harmony import */ var _img_spriteFireFlowerStandLeft_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../img/spriteFireFlowerStandLeft.png */ "./src/img/spriteFireFlowerStandLeft.png");
+/* harmony import */ var _img_spriteFireFlowerJumpRight_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../img/spriteFireFlowerJumpRight.png */ "./src/img/spriteFireFlowerJumpRight.png");
+/* harmony import */ var _img_spriteFireFlowerJumpLeft_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../img/spriteFireFlowerJumpLeft.png */ "./src/img/spriteFireFlowerJumpLeft.png");
+/* harmony import */ var _img_spriteFireFlower_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../img/spriteFireFlower.png */ "./src/img/spriteFireFlower.png");
+/* harmony import */ var _img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../img/spriteGoomba.png */ "./src/img/spriteGoomba.png");
+
+
+
+
+
+
+
 
 
 
@@ -1263,42 +1368,62 @@ var Player = /*#__PURE__*/function () {
       stand: {
         right: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteMarioStandRight_png__WEBPACK_IMPORTED_MODULE_18__["default"]),
         left: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteMarioStandLeft_png__WEBPACK_IMPORTED_MODULE_17__["default"]),
-        cropWidth: 398,
-        width: 398 * this.scale
+        fireFlower: {
+          right: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlowerStandRight_png__WEBPACK_IMPORTED_MODULE_23__["default"]),
+          left: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlowerStandLeft_png__WEBPACK_IMPORTED_MODULE_24__["default"])
+        }
       },
       run: {
         right: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteMarioRunRight_png__WEBPACK_IMPORTED_MODULE_16__["default"]),
         left: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteMarioRunLeft_png__WEBPACK_IMPORTED_MODULE_15__["default"]),
-        cropWidth: 398,
-        width: 398 * this.scale
+        fireFlower: {
+          right: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlowerRunRight_png__WEBPACK_IMPORTED_MODULE_21__["default"]),
+          left: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlowerRunLeft_png__WEBPACK_IMPORTED_MODULE_22__["default"])
+        }
       },
       jump: {
         right: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteMarioJumpRight_png__WEBPACK_IMPORTED_MODULE_19__["default"]),
         left: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteMarioJumpLeft_png__WEBPACK_IMPORTED_MODULE_20__["default"]),
-        cropWidth: 398,
-        width: 398 * this.scale
+        fireFlower: {
+          right: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlowerJumpRight_png__WEBPACK_IMPORTED_MODULE_25__["default"]),
+          left: Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlowerJumpLeft_png__WEBPACK_IMPORTED_MODULE_26__["default"])
+        }
       }
     };
     this.currentSprite = this.sprites.stand.right;
-    this.currentCropWidth = this.sprites.stand.cropWidth;
+    this.currentCropWidth = 398;
+    this.powerUps = {
+      fireFlower: false
+    };
+    this.invincible = false;
+    this.opacity = 1;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Player, [{
     key: "draw",
     value: function draw() {
+      c.save();
+      c.globalAlpha = this.opacity;
       c.fillStyle = 'rgba(255, 0, 0, .2)';
       c.fillRect(this.position.x, this.position.y, this.width, this.height);
       c.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, 353, this.position.x, this.position.y, this.width, this.height);
+      c.restore();
     }
   }, {
     key: "update",
     value: function update() {
       this.frames++;
-      if (this.frames > 58 && (this.currentSprite === this.sprites.stand.right || this.currentSprite === this.sprites.stand.left)) this.frames = 0;else if (this.frames > 28 && (this.currentSprite === this.sprites.run.right || this.currentSprite === this.sprites.run.left)) this.frames = 0;else if (this.currentSprite === this.sprites.jump.right || this.currentSprite === this.sprites.jump.left) this.frames = 0;
+      var currentSprite = this.currentSprite,
+          sprites = this.sprites;
+      if (this.frames > 58 && (currentSprite === sprites.stand.right || currentSprite === sprites.stand.left || currentSprite === sprites.stand.fireFlower.left || currentSprite === sprites.stand.fireFlower.right)) this.frames = 0;else if (this.frames > 28 && (currentSprite === sprites.run.right || currentSprite === sprites.run.left || currentSprite === sprites.run.fireFlower.right || currentSprite === sprites.run.fireFlower.left)) this.frames = 0;else if (currentSprite === sprites.jump.right || currentSprite === sprites.jump.left || currentSprite === sprites.jump.fireFlower.right || currentSprite === sprites.jump.fireFlower.left) this.frames = 0;
       this.draw();
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
       if (this.position.y + this.height + this.velocity.y <= canvas.height) this.velocity.y += gravity;
+
+      if (this.invincible) {
+        if (this.opacity === 1) this.opacity = 0;else this.opacity = 1;
+      } else this.opacity = 1;
     }
   }]);
 
@@ -1408,7 +1533,7 @@ var Goomba = /*#__PURE__*/function () {
     };
     this.width = 43.33;
     this.height = 50;
-    this.image = Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_21__["default"]);
+    this.image = Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_28__["default"]);
     this.frames = 0;
     this.distance = distance;
   }
@@ -1442,11 +1567,58 @@ var Goomba = /*#__PURE__*/function () {
   return Goomba;
 }();
 
-var Particle = /*#__PURE__*/function () {
-  function Particle(_ref4) {
+var FireFlower = /*#__PURE__*/function () {
+  function FireFlower(_ref4) {
     var position = _ref4.position,
-        velocity = _ref4.velocity,
-        radius = _ref4.radius;
+        velocity = _ref4.velocity;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, FireFlower);
+
+    this.position = {
+      x: position.x,
+      y: position.y
+    };
+    this.velocity = {
+      x: velocity.x,
+      y: velocity.y
+    };
+    this.width = 56;
+    this.height = 60;
+    this.image = Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["createImage"])(_img_spriteFireFlower_png__WEBPACK_IMPORTED_MODULE_27__["default"]);
+    this.frames = 0;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(FireFlower, [{
+    key: "draw",
+    value: function draw() {
+      // c.fillStyle = 'red'
+      // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+      c.drawImage(this.image, 56 * this.frames, 0, 56, 60, this.position.x, this.position.y, this.width, this.height);
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.frames++;
+      if (this.frames >= 75) this.frames = 0;
+      this.draw();
+      this.position.x += this.velocity.x;
+      this.position.y += this.velocity.y;
+      if (this.position.y + this.height + this.velocity.y <= canvas.height) this.velocity.y += gravity;
+    }
+  }]);
+
+  return FireFlower;
+}();
+
+var Particle = /*#__PURE__*/function () {
+  function Particle(_ref5) {
+    var position = _ref5.position,
+        velocity = _ref5.velocity,
+        radius = _ref5.radius,
+        _ref5$color = _ref5.color,
+        color = _ref5$color === void 0 ? '#654428' : _ref5$color,
+        _ref5$fireball = _ref5.fireball,
+        fireball = _ref5$fireball === void 0 ? false : _ref5$fireball;
 
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, Particle);
 
@@ -1460,6 +1632,8 @@ var Particle = /*#__PURE__*/function () {
     };
     this.radius = radius;
     this.ttl = 300;
+    this.color = color;
+    this.fireball = fireball;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Particle, [{
@@ -1467,7 +1641,7 @@ var Particle = /*#__PURE__*/function () {
     value: function draw() {
       c.beginPath();
       c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
-      c.fillStyle = '#654428';
+      c.fillStyle = this.color;
       c.fill();
       c.closePath();
     }
@@ -1493,6 +1667,7 @@ var platforms = [];
 var genericObjects = [];
 var goombas = [];
 var particles = [];
+var fireFlowers = [];
 var lastKey;
 var keys = {
   right: {
@@ -1529,6 +1704,16 @@ function _init() {
 
           case 8:
             blockTriImage = _context.sent;
+            fireFlowers = [new FireFlower({
+              position: {
+                x: 400,
+                y: 100
+              },
+              velocity: {
+                x: 0,
+                y: 0
+              }
+            })];
             player = new Player();
             goombas = [new Goomba({
               position: {
@@ -1605,7 +1790,7 @@ function _init() {
             })];
             scrollOffset = 0;
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -1626,9 +1811,46 @@ function animate() {
   platforms.forEach(function (platform) {
     platform.update();
     platform.velocity.x = 0;
+  }); // mario obtains powerup
+
+  fireFlowers.forEach(function (fireFlower, i) {
+    if (Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["objectsTouch"])({
+      object1: player,
+      object2: fireFlower
+    })) {
+      player.powerUps.fireFlower = true;
+      setTimeout(function () {
+        fireFlowers.splice(i, 1);
+      }, 0);
+    } else fireFlower.update();
   });
   goombas.forEach(function (goomba, index) {
-    goomba.update(); // goomba stomp squish
+    goomba.update(); // remove goomba on fireball hit
+
+    particles.filter(function (particle) {
+      return particle.fireball;
+    }).forEach(function (particle, particleIndex) {
+      if (particle.position.x + particle.radius >= goomba.position.x && particle.position.y + particle.radius >= goomba.position.y && particle.position.x - particle.radius <= goomba.position.x + goomba.width && particle.position.y - particle.radius <= goomba.position.y + goomba.height) {
+        for (var i = 0; i < 50; i++) {
+          particles.push(new Particle({
+            position: {
+              x: goomba.position.x + goomba.width / 2,
+              y: goomba.position.y + goomba.height / 2
+            },
+            velocity: {
+              x: (Math.random() - 0.5) * 7,
+              y: (Math.random() - 0.5) * 15
+            },
+            radius: Math.random() * 3
+          }));
+        }
+
+        setTimeout(function () {
+          goombas.splice(index, 1);
+          particles.splice(particleIndex, 1);
+        }, 0);
+      }
+    }); // goomba stomp squish
 
     if (Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["collisionTop"])({
       object1: player,
@@ -1652,11 +1874,24 @@ function animate() {
       setTimeout(function () {
         goombas.splice(index, 1);
       }, 0);
-    } else if (player.position.x + player.width >= goomba.position.x && player.position.y + player.height >= goomba.position.y && player.position.x <= goomba.position.x + goomba.width) init();
+    } else if (player.position.x + player.width >= goomba.position.x && player.position.y + player.height >= goomba.position.y && player.position.x <= goomba.position.x + goomba.width) {
+      // player hits goomba
+      if (player.powerUps.fireFlower) {
+        player.invincible = true;
+        player.powerUps.fireFlower = false;
+        setTimeout(function () {
+          player.invincible = false;
+        }, 1000);
+      } else if (!player.invincible) init();
+    }
   });
-  particles.forEach(function (particle) {
+  particles.forEach(function (particle, i) {
     particle.update();
+    if (particle.fireball && (particle.position.x - particle.radius >= canvas.width || particle.position.x + particle.radius <= 0)) setTimeout(function () {
+      particles.splice(i, 1);
+    }, 0);
   });
+  console.log(particles);
   player.update();
   var hitSide = false;
 
@@ -1692,6 +1927,9 @@ function animate() {
         goombas.forEach(function (goomba) {
           goomba.position.x -= player.speed;
         });
+        fireFlowers.forEach(function (fireFlower) {
+          fireFlower.position.x -= player.speed;
+        });
         particles.forEach(function (particle) {
           particle.position.x -= player.speed;
         });
@@ -1720,6 +1958,9 @@ function animate() {
         });
         goombas.forEach(function (goomba) {
           goomba.position.x += player.speed;
+        });
+        fireFlowers.forEach(function (fireFlower) {
+          fireFlower.position.x += player.speed;
         });
         particles.forEach(function (particle) {
           particle.position.x += player.speed;
@@ -1757,7 +1998,8 @@ function animate() {
         object: particle,
         platform: platform
       })) {
-        particle.velocity.y = -particle.velocity.y * 0.9;
+        var bounce = 0.9;
+        particle.velocity.y = -particle.velocity.y * 0.99;
         if (particle.radius - 0.4 < 0) particles.splice(index, 1);else particle.radius -= 0.4;
       }
 
@@ -1769,29 +2011,13 @@ function animate() {
         platform: platform
       })) goomba.velocity.y = 0;
     });
-  }); // sprite switching
-
-  if (player.velocity.y === 0) {
-    if (keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.right) {
-      player.frames = 1;
-      player.currentSprite = player.sprites.run.right;
-      player.currentCropWidth = player.sprites.run.cropWidth;
-      player.width = player.sprites.run.width;
-    } else if (keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.run.left) {
-      player.currentSprite = player.sprites.run.left;
-      player.currentCropWidth = player.sprites.run.cropWidth;
-      player.width = player.sprites.run.width;
-    } else if (!keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.stand.left) {
-      player.currentSprite = player.sprites.stand.left;
-      player.currentCropWidth = player.sprites.stand.cropWidth;
-      player.width = player.sprites.stand.width;
-    } else if (!keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.stand.right) {
-      player.currentSprite = player.sprites.stand.right;
-      player.currentCropWidth = player.sprites.stand.cropWidth;
-      player.width = player.sprites.stand.width;
-    }
-  } // win condition
-
+    fireFlowers.forEach(function (fireFlower) {
+      if (Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["isOnTopOfPlatform"])({
+        object: fireFlower,
+        platform: platform
+      })) fireFlower.velocity.y = 0;
+    });
+  }); // win condition
 
   if (platformImage && scrollOffset > platformImage.width * 5 + 300 - 2) {
     console.log('you win');
@@ -1800,15 +2026,41 @@ function animate() {
 
   if (player.position.y > canvas.height) {
     init();
+  } // sprite switching
+
+
+  if (player.velocity.y !== 0) return;
+
+  if (keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.right) {
+    player.currentSprite = player.sprites.run.right;
+  } else if (keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.run.left) {
+    player.currentSprite = player.sprites.run.left;
+  } else if (!keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.stand.left) {
+    player.currentSprite = player.sprites.stand.left;
+  } else if (!keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.stand.right) {
+    player.currentSprite = player.sprites.stand.right;
+  } // fireflower sprites
+
+
+  if (!player.powerUps.fireFlower) return;
+
+  if (keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.fireFlower.right) {
+    player.currentSprite = player.sprites.run.fireFlower.right;
+  } else if (keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.run.fireFlower.left) {
+    player.currentSprite = player.sprites.run.fireFlower.left;
+  } else if (!keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.stand.fireFlower.left) {
+    player.currentSprite = player.sprites.stand.fireFlower.left;
+  } else if (!keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.stand.fireFlower.right) {
+    player.currentSprite = player.sprites.stand.fireFlower.right;
   }
 }
 
 init();
 animate();
-addEventListener('keydown', function (_ref5) {
-  var keyCode = _ref5.keyCode;
+addEventListener('keydown', function (_ref6) {
+  var keyCode = _ref6.keyCode;
+  console.log(keyCode);
 
-  // console.log(keyCode)
   switch (keyCode) {
     case 65:
       console.log('left');
@@ -1830,11 +2082,33 @@ addEventListener('keydown', function (_ref5) {
       console.log('up');
       player.velocity.y -= 25;
       if (lastKey === 'right') player.currentSprite = player.sprites.jump.right;else player.currentSprite = player.sprites.jump.left;
+      if (!player.powerUps.fireFlower) break;
+      if (lastKey === 'right') player.currentSprite = player.sprites.jump.fireFlower.right;else player.currentSprite = player.sprites.jump.fireFlower.left;
+      break;
+
+    case 32:
+      console.log('space');
+      if (!player.powerUps.fireFlower) return;
+      var velocity = 15;
+      if (lastKey === 'left') velocity = -velocity;
+      particles.push(new Particle({
+        position: {
+          x: player.position.x + player.width / 2,
+          y: player.position.y + player.height / 2
+        },
+        velocity: {
+          x: velocity,
+          y: 0
+        },
+        radius: 5,
+        color: 'red',
+        fireball: true
+      }));
       break;
   }
 });
-addEventListener('keyup', function (_ref6) {
-  var keyCode = _ref6.keyCode;
+addEventListener('keyup', function (_ref7) {
+  var keyCode = _ref7.keyCode;
 
   // console.log(keyCode)
   switch (keyCode) {
@@ -1864,7 +2138,7 @@ addEventListener('keyup', function (_ref6) {
 /*!*************************!*\
   !*** ./src/js/utils.js ***!
   \*************************/
-/*! exports provided: createImage, createImageAsync, isOnTopOfPlatform, collisionTop, isOnTopOfPlatformCircle, hitBottomOfPlatform, hitSideOfPlatform */
+/*! exports provided: createImage, createImageAsync, isOnTopOfPlatform, collisionTop, isOnTopOfPlatformCircle, hitBottomOfPlatform, hitSideOfPlatform, objectsTouch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1876,6 +2150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOnTopOfPlatformCircle", function() { return isOnTopOfPlatformCircle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hitBottomOfPlatform", function() { return hitBottomOfPlatform; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hitSideOfPlatform", function() { return hitSideOfPlatform; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objectsTouch", function() { return objectsTouch; });
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -1930,6 +2205,11 @@ function hitSideOfPlatform(_ref5) {
   var object = _ref5.object,
       platform = _ref5.platform;
   return object.position.x + object.width + object.velocity.x - platform.velocity.x >= platform.position.x && object.position.x + object.velocity.x <= platform.position.x + platform.width && object.position.y <= platform.position.y + platform.height && object.position.y + object.height >= platform.position.y;
+}
+function objectsTouch(_ref6) {
+  var object1 = _ref6.object1,
+      object2 = _ref6.object2;
+  return object1.position.x + object1.width >= object2.position.x && object1.position.x <= object2.position.x + object2.width && object1.position.y + object1.height >= object2.position.y && object1.position.y <= object2.position.y + object2.height;
 }
 
 /***/ })
