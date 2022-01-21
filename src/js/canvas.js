@@ -15,6 +15,10 @@ import background from '../img/background.png'
 import platformSmallTall from '../img/platformSmallTall.png'
 import block from '../img/block.png'
 import blockTri from '../img/blockTri.png'
+import mdPlatform from '../img/mdPlatform.png'
+import lgPlatform from '../img/lgPlatform.png'
+import tPlatform from '../img/tPlatform.png'
+import xtPlatform from '../img/xtPlatform.png'
 
 import spriteRunLeft from '../img/spriteRunLeft.png'
 import spriteRunRight from '../img/spriteRunRight.png'
@@ -184,6 +188,7 @@ class Platform {
     c.drawImage(this.image, this.position.x, this.position.y)
 
     if (this.text) {
+      c.font = '20px Arial'
       c.fillStyle = 'red'
       c.fillText(this.text, this.position.x, this.position.y)
     }
@@ -380,6 +385,10 @@ class Particle {
 let platformImage
 let platformSmallTallImage
 let blockTriImage
+let lgPlatformImage
+let tPlatformImage
+let xtPlatformImage
+let blockImage
 
 let player = new Player()
 let platforms = []
@@ -404,6 +413,10 @@ async function init() {
   platformImage = await createImageAsync(platform)
   platformSmallTallImage = await createImageAsync(platformSmallTall)
   blockTriImage = await createImageAsync(blockTri)
+  blockImage = await createImageAsync(block)
+  lgPlatformImage = await createImageAsync(lgPlatform)
+  tPlatformImage = await createImageAsync(tPlatform)
+  xtPlatformImage = await createImageAsync(xtPlatform)
 
   fireFlowers = [
     new FireFlower({
@@ -419,10 +432,12 @@ async function init() {
   ]
 
   player = new Player()
+
+  const goombaWidth = 43.33
   goombas = [
     new Goomba({
       position: {
-        x: 800,
+        x: 908 + lgPlatformImage.width - goombaWidth,
         y: 100
       },
       velocity: {
@@ -430,70 +445,180 @@ async function init() {
         y: 0
       },
       distance: {
-        limit: 200,
+        limit: 400,
         traveled: 0
       }
     }),
     new Goomba({
       position: {
-        x: 1400,
+        x: 3249 + lgPlatformImage.width - goombaWidth,
         y: 100
       },
       velocity: {
         x: -0.3,
         y: 0
+      },
+      distance: {
+        limit: 400,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      position: {
+        x: 3249 + lgPlatformImage.width - goombaWidth - goombaWidth,
+        y: 100
+      },
+      velocity: {
+        x: -0.3,
+        y: 0
+      },
+      distance: {
+        limit: 400,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      position: {
+        x:
+          3249 +
+          lgPlatformImage.width -
+          goombaWidth -
+          goombaWidth -
+          goombaWidth,
+        y: 100
+      },
+      velocity: {
+        x: -0.3,
+        y: 0
+      },
+      distance: {
+        limit: 400,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      position: {
+        x:
+          3249 +
+          lgPlatformImage.width -
+          goombaWidth -
+          goombaWidth -
+          goombaWidth -
+          goombaWidth,
+        y: 100
+      },
+      velocity: {
+        x: -0.3,
+        y: 0
+      },
+      distance: {
+        limit: 400,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      position: {
+        x: 5135 + xtPlatformImage.width / 2 + goombaWidth,
+        y: 100
+      },
+      velocity: {
+        x: -0.3,
+        y: 0
+      },
+      distance: {
+        limit: 100,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      position: {
+        x: 6968,
+        y: 0
+      },
+      velocity: {
+        x: -0.3,
+        y: 0
+      },
+      distance: {
+        limit: 100,
+        traveled: 0
       }
     })
   ]
   particles = []
   platforms = [
     new Platform({
-      x:
-        platformImage.width * 4 +
-        300 -
-        2 +
-        platformImage.width -
-        platformSmallTallImage.width,
-      y: 270,
-      image: createImage(platformSmallTall)
-    }),
-    new Platform({
-      x: -1,
-      y: 470,
-      image: platformImage
-    }),
-    new Platform({ x: platformImage.width - 3, y: 470, image: platformImage }),
-    new Platform({
-      x: platformImage.width * 2 + 100,
-      y: 470,
-      image: platformImage,
-      text: 'here',
-      block: true
-    }),
-    new Platform({
-      x: platformImage.width * 3 + 300,
-      y: 470,
-      image: platformImage,
-      text: 'here',
-      block: true
-    }),
-    new Platform({
-      x: platformImage.width * 4 + 300 - 2,
-      y: 470,
-      image: platformImage
-    }),
-    new Platform({
-      x: platformImage.width * 5 + 700 - 2,
-      y: 470,
-      image: platformImage,
-      text: 'here',
-      block: true
-    }),
-    new Platform({
-      x: 850,
-      y: 270,
+      x: 908 + 100,
+      y: 300,
       image: blockTriImage,
       block: true
+    }),
+    new Platform({
+      x: 908 + 100 + blockImage.width,
+      y: 100,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 1991 + lgPlatformImage.width - tPlatformImage.width,
+      y: canvas.height - lgPlatformImage.height - tPlatformImage.height,
+      image: tPlatformImage,
+      block: false
+    }),
+    new Platform({
+      x: 1991 + lgPlatformImage.width - tPlatformImage.width - 100,
+      y:
+        canvas.height -
+        lgPlatformImage.height -
+        tPlatformImage.height +
+        blockImage.height,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 5712 + xtPlatformImage.width + 175,
+      y: canvas.height - xtPlatformImage.height,
+      image: blockImage,
+      block: true,
+      text: 5712 + xtPlatformImage.width + 175
+    }),
+    new Platform({
+      x: 6116 + 175,
+      y: canvas.height - xtPlatformImage.height,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 6116 + 175 * 2,
+      y: canvas.height - xtPlatformImage.height,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 6116 + 175 * 3,
+      y: canvas.height - xtPlatformImage.height - 100,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 6116 + 175 * 4,
+      y: canvas.height - xtPlatformImage.height - 200,
+      image: blockTriImage,
+      block: true
+    }),
+    new Platform({
+      x: 6116 + 175 * 4 + blockTriImage.width,
+      y: canvas.height - xtPlatformImage.height - 200,
+      image: blockTriImage,
+      block: true,
+      text: 6116 + 175 * 4 + blockTriImage.width
+    }),
+    new Platform({
+      x: 6968 + 300,
+      y: canvas.height - lgPlatformImage.height,
+      image: lgPlatformImage,
+      block: true,
+      text: 6968 + 300
     })
   ]
   genericObjects = [
@@ -510,6 +635,80 @@ async function init() {
   ]
 
   scrollOffset = 0
+
+  const platformsMap = [
+    'lg',
+    'lg',
+    'gap',
+    'lg',
+    'gap',
+    'gap',
+    'lg',
+    'gap',
+    't',
+    'gap',
+    'xt',
+    'gap',
+    'xt',
+    'gap',
+    'gap',
+    'xt'
+  ]
+
+  let platformDistance = 0
+
+  platformsMap.forEach((symbol) => {
+    switch (symbol) {
+      case 'lg':
+        platforms.push(
+          new Platform({
+            x: platformDistance,
+            y: canvas.height - lgPlatformImage.height,
+            image: lgPlatformImage,
+            block: true,
+            text: platformDistance
+          })
+        )
+
+        platformDistance += lgPlatformImage.width - 2
+
+        break
+
+      case 'gap':
+        platformDistance += 175
+
+        break
+
+      case 't':
+        platforms.push(
+          new Platform({
+            x: platformDistance,
+            y: canvas.height - tPlatformImage.height,
+            image: tPlatformImage,
+            block: true
+          })
+        )
+
+        platformDistance += tPlatformImage.width - 2
+
+        break
+
+      case 'xt':
+        platforms.push(
+          new Platform({
+            x: platformDistance,
+            y: canvas.height - xtPlatformImage.height,
+            image: xtPlatformImage,
+            block: true,
+            text: platformDistance
+          })
+        )
+
+        platformDistance += xtPlatformImage.width - 2
+
+        break
+    }
+  })
 }
 
 function animate() {
@@ -634,7 +833,6 @@ function animate() {
         particles.splice(i, 1)
       }, 0)
   })
-  console.log(particles)
   player.update()
 
   let hitSide = false
@@ -803,7 +1001,7 @@ function animate() {
   })
 
   // win condition
-  if (platformImage && scrollOffset > platformImage.width * 5 + 300 - 2) {
+  if (platformImage && scrollOffset + 400 + player.width > 6968 + 300) {
     console.log('you win')
   }
 
