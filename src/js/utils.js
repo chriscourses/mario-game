@@ -83,6 +83,7 @@ export function hitSideOfPlatform({ object, platform }) {
   )
 }
 
+// two rectangles collide
 export function objectsTouch({ object1, object2 }) {
   return (
     object1.position.x + object1.width >= object2.position.x &&

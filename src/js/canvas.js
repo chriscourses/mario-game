@@ -1,3 +1,4 @@
+import gsap from 'gsap'
 import {
   createImage,
   createImageAsync,
@@ -19,6 +20,7 @@ import mdPlatform from '../img/mdPlatform.png'
 import lgPlatform from '../img/lgPlatform.png'
 import tPlatform from '../img/tPlatform.png'
 import xtPlatform from '../img/xtPlatform.png'
+import flagPoleSprite from '../img/flagPole.png'
 
 import spriteRunLeft from '../img/spriteRunLeft.png'
 import spriteRunRight from '../img/spriteRunRight.png'
@@ -49,7 +51,7 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
 
-const gravity = 1.5
+let gravity = 1.5
 
 class Player {
   constructor() {
@@ -408,8 +410,15 @@ const keys = {
 }
 
 let scrollOffset = 0
+let flagPole
+let flagPoleImage
+let game
 
 async function init() {
+  game = {
+    disableUserInput: false
+  }
+
   platformImage = await createImageAsync(platform)
   platformSmallTallImage = await createImageAsync(platformSmallTall)
   blockTriImage = await createImageAsync(blockTri)
@@ -417,6 +426,14 @@ async function init() {
   lgPlatformImage = await createImageAsync(lgPlatform)
   tPlatformImage = await createImageAsync(tPlatform)
   xtPlatformImage = await createImageAsync(xtPlatform)
+  flagPoleImage = await createImageAsync(flagPoleSprite)
+
+  flagPole = new GenericObject({
+    // x: 6968 + 600,
+    x: 500,
+    y: canvas.height - lgPlatformImage.height - flagPoleImage.height,
+    image: flagPoleImage
+  })
 
   fireFlowers = [
     new FireFlower({
@@ -726,6 +743,49 @@ function animate() {
     platform.velocity.x = 0
   })
 
+  if (flagPole) {
+    flagPole.update()
+    flagPole.velocity.x = 0
+
+    // mario touches flagpole
+    // win condition
+    if (
+      !game.disableUserInput &&
+      objectsTouch({
+        object1: player,
+        object2: flagPole
+      })
+    ) {
+      game.disableUserInput = true
+      player.velocity.x = 0
+      player.velocity.y = 0
+      gravity = 0
+
+      player.currentSprite = player.sprites.stand.right
+
+      if (player.powerUps.fireFlower)
+        player.currentSprite = player.sprites.stand.fireFlower.right
+
+      gsap.to(player.position, {
+        y: canvas.height - lgPlatformImage.height - player.height,
+        duration: 1,
+        onComplete() {
+          player.currentSprite = player.sprites.run.right
+
+          if (player.powerUps.fireFlower)
+            player.currentSprite = player.sprites.run.fireFlower.right
+        }
+      })
+
+      gsap.to(player.position, {
+        delay: 1,
+        x: canvas.width,
+        duration: 2,
+        ease: 'power1.in'
+      })
+    }
+  }
+
   // mario obtains powerup
   fireFlowers.forEach((fireFlower, i) => {
     if (
@@ -835,8 +895,10 @@ function animate() {
   })
   player.update()
 
-  let hitSide = false
+  if (game.disableUserInput) return
 
+  // scrolling code starts
+  let hitSide = false
   if (keys.right.pressed && player.position.x < 400) {
     player.velocity.x = player.speed
   } else if (
@@ -871,6 +933,8 @@ function animate() {
 
       if (!hitSide) {
         scrollOffset += player.speed
+
+        flagPole.velocity.x = -player.speed
 
         genericObjects.forEach((genericObject) => {
           genericObject.velocity.x = -player.speed * 0.66
@@ -911,6 +975,9 @@ function animate() {
 
       if (!hitSide) {
         scrollOffset -= player.speed
+
+        flagPole.velocity.x = player.speed
+
         genericObjects.forEach((genericObject) => {
           genericObject.velocity.x = player.speed * 0.66
         })
@@ -1000,11 +1067,6 @@ function animate() {
     })
   })
 
-  // win condition
-  if (platformImage && scrollOffset + 400 + player.width > 6968 + 300) {
-    console.log('you win')
-  }
-
   // lose condition
   if (player.position.y > canvas.height) {
     init()
@@ -1073,7 +1135,8 @@ init()
 animate()
 
 addEventListener('keydown', ({ keyCode }) => {
-  console.log(keyCode)
+  if (game.disableUserInput) return
+
   switch (keyCode) {
     case 65:
       console.log('left')
@@ -1136,7 +1199,8 @@ addEventListener('keydown', ({ keyCode }) => {
 })
 
 addEventListener('keyup', ({ keyCode }) => {
-  // console.log(keyCode)
+  if (game.disableUserInput) return
+
   switch (keyCode) {
     case 65:
       console.log('left')
