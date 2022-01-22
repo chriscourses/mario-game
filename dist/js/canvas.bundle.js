@@ -7254,7 +7254,9 @@ var Particle = /*#__PURE__*/function () {
         _ref5$color = _ref5.color,
         color = _ref5$color === void 0 ? '#654428' : _ref5$color,
         _ref5$fireball = _ref5.fireball,
-        fireball = _ref5$fireball === void 0 ? false : _ref5$fireball;
+        fireball = _ref5$fireball === void 0 ? false : _ref5$fireball,
+        _ref5$fades = _ref5.fades,
+        fades = _ref5$fades === void 0 ? false : _ref5$fades;
 
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, Particle);
 
@@ -7270,16 +7272,21 @@ var Particle = /*#__PURE__*/function () {
     this.ttl = 300;
     this.color = color;
     this.fireball = fireball;
+    this.opacity = 1;
+    this.fades = fades;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(Particle, [{
     key: "draw",
     value: function draw() {
+      c.save();
+      c.globalAlpha = this.opacity;
       c.beginPath();
       c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
       c.fillStyle = this.color;
       c.fill();
       c.closePath();
+      c.restore();
     }
   }, {
     key: "update",
@@ -7289,6 +7296,12 @@ var Particle = /*#__PURE__*/function () {
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
       if (this.position.y + this.radius + this.velocity.y <= canvas.height) this.velocity.y += gravity * 0.4;
+
+      if (this.fades && this.opacity > 0) {
+        this.opacity -= 0.01;
+      }
+
+      if (this.opacity < 0) this.opacity = 0;
     }
   }]);
 
@@ -7377,8 +7390,8 @@ function _init() {
           case 24:
             flagPoleImage = _context.sent;
             flagPole = new GenericObject({
-              // x: 6968 + 600,
-              x: 500,
+              x: 6968 + 600,
+              // x: 500,
               y: canvas.height - lgPlatformImage.height - flagPoleImage.height,
               image: flagPoleImage
             });
@@ -7616,6 +7629,12 @@ function animate() {
     genericObject.update();
     genericObject.velocity.x = 0;
   });
+  particles.forEach(function (particle, i) {
+    particle.update();
+    if (particle.fireball && (particle.position.x - particle.radius >= canvas.width || particle.position.x + particle.radius <= 0)) setTimeout(function () {
+      particles.splice(i, 1);
+    }, 0);
+  });
   platforms.forEach(function (platform) {
     platform.update();
     platform.velocity.x = 0;
@@ -7649,7 +7668,32 @@ function animate() {
         x: canvas.width,
         duration: 2,
         ease: 'power1.in'
-      });
+      }); // fireworks
+
+      var particleCount = 300;
+      var radians = Math.PI * 2 / particleCount;
+      var power = 8;
+      var increment = 1;
+      var intervalId = setInterval(function () {
+        for (var i = 0; i < particleCount; i++) {
+          particles.push(new Particle({
+            position: {
+              x: canvas.width / 4 * increment,
+              y: canvas.height / 2
+            },
+            velocity: {
+              x: Math.cos(radians * i) * power * Math.random(),
+              y: Math.sin(radians * i) * power * Math.random()
+            },
+            radius: 3 * Math.random(),
+            color: "hsl(".concat(Math.random() * 200, ", 50%, 50%)"),
+            fades: true
+          }));
+        }
+
+        if (increment === 3) clearInterval(intervalId);
+        increment++;
+      }, 1000);
     }
   } // mario obtains powerup
 
@@ -7725,12 +7769,6 @@ function animate() {
         }, 1000);
       } else if (!player.invincible) init();
     }
-  });
-  particles.forEach(function (particle, i) {
-    particle.update();
-    if (particle.fireball && (particle.position.x - particle.radius >= canvas.width || particle.position.x + particle.radius <= 0)) setTimeout(function () {
-      particles.splice(i, 1);
-    }, 0);
   });
   player.update();
   if (game.disableUserInput) return; // scrolling code starts
