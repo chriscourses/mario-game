@@ -44,6 +44,7 @@ import spriteFireFlowerJumpLeft from '../img/spriteFireFlowerJumpLeft.png'
 import spriteFireFlower from '../img/spriteFireFlower.png'
 
 import spriteGoomba from '../img/spriteGoomba.png'
+import { audio } from './audio.js'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -774,6 +775,7 @@ function animate() {
 
     // mario touches flagpole
     // win condition
+    // complete level
     if (
       !game.disableUserInput &&
       objectsTouch({
@@ -781,6 +783,8 @@ function animate() {
         object2: flagPole
       })
     ) {
+      audio.completeLevel.play()
+      audio.musicLevel1.stop()
       game.disableUserInput = true
       player.velocity.x = 0
       player.velocity.y = 0
@@ -791,6 +795,10 @@ function animate() {
       if (player.powerUps.fireFlower)
         player.currentSprite = player.sprites.stand.fireFlower.right
 
+      // flagpole slide
+      setTimeout(() => {
+        audio.descend.play()
+      }, 200)
       gsap.to(player.position, {
         y: canvas.height - lgPlatformImage.height - player.height,
         duration: 1,
@@ -833,6 +841,9 @@ function animate() {
             })
           )
         }
+
+        audio.fireworkBurst.play()
+        audio.fireworkWhistle.play()
 
         if (increment === 3) clearInterval(intervalId)
 
@@ -893,13 +904,15 @@ function animate() {
         }
       })
 
-    // goomba stomp squish
+    // goomba stomp squish / squash
     if (
       collisionTop({
         object1: player,
         object2: goomba
       })
     ) {
+      audio.goombaSquash.play()
+
       for (let i = 0; i < 50; i++) {
         particles.push(
           new Particle({
@@ -925,14 +938,19 @@ function animate() {
       player.position.x <= goomba.position.x + goomba.width
     ) {
       // player hits goomba
+      // lose fireflower / lose powerup
       if (player.powerUps.fireFlower) {
         player.invincible = true
         player.powerUps.fireFlower = false
+        audio.losePowerUp.play()
 
         setTimeout(() => {
           player.invincible = false
         }, 1000)
-      } else if (!player.invincible) init()
+      } else if (!player.invincible) {
+        audio.die.play()
+        init()
+      }
     }
   })
 
@@ -1112,6 +1130,7 @@ function animate() {
 
   // lose condition
   if (player.position.y > canvas.height) {
+    audio.die.play()
     init()
   }
 
@@ -1203,6 +1222,8 @@ addEventListener('keydown', ({ keyCode }) => {
       console.log('up')
       player.velocity.y -= 25
 
+      audio.jump.play()
+
       if (lastKey === 'right') player.currentSprite = player.sprites.jump.right
       else player.currentSprite = player.sprites.jump.left
 
@@ -1218,6 +1239,8 @@ addEventListener('keydown', ({ keyCode }) => {
       console.log('space')
 
       if (!player.powerUps.fireFlower) return
+
+      audio.fireFlowerShot.play()
 
       let velocity = 15
       if (lastKey === 'left') velocity = -velocity
