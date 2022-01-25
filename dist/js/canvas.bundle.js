@@ -10022,6 +10022,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/level2/background.png":
+/*!***************************************!*\
+  !*** ./src/img/level2/background.png ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "38f7e9ffc7b9e50090785b0836e49ba3.png");
+
+/***/ }),
+
+/***/ "./src/img/level2/lgPlatform.png":
+/*!***************************************!*\
+  !*** ./src/img/level2/lgPlatform.png ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "dc6f057d3bc6abca57f5ba86213edc7b.png");
+
+/***/ }),
+
+/***/ "./src/img/level2/mountains.png":
+/*!**************************************!*\
+  !*** ./src/img/level2/mountains.png ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "b83154a3dc63cdc45428534b969e9f25.png");
+
+/***/ }),
+
 /***/ "./src/img/lgPlatform.png":
 /*!********************************!*\
   !*** ./src/img/lgPlatform.png ***!
@@ -10475,6 +10514,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_spriteFireFlower_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../img/spriteFireFlower.png */ "./src/img/spriteFireFlower.png");
 /* harmony import */ var _img_spriteGoomba_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../img/spriteGoomba.png */ "./src/img/spriteGoomba.png");
 /* harmony import */ var _audio_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./audio.js */ "./src/js/audio.js");
+/* harmony import */ var _images_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./images.js */ "./src/js/images.js");
+
 
 
 
@@ -10858,18 +10899,24 @@ var goombas = [];
 var particles = [];
 var fireFlowers = [];
 var lastKey;
-var keys = {
-  right: {
-    pressed: false
-  },
-  left: {
-    pressed: false
-  }
-};
-var scrollOffset = 0;
+var keys;
+var scrollOffset;
 var flagPole;
 var flagPoleImage;
 var game;
+var currentLevel = 1;
+
+function selectLevel(currentLevel) {
+  switch (currentLevel) {
+    case 1:
+      init();
+      break;
+
+    case 2:
+      initLevel2();
+      break;
+  }
+}
 
 function init() {
   return _init.apply(this, arguments);
@@ -10882,48 +10929,58 @@ function _init() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            player = new Player();
+            keys = {
+              right: {
+                pressed: false
+              },
+              left: {
+                pressed: false
+              }
+            };
+            scrollOffset = 0;
             game = {
               disableUserInput: false
             };
-            _context.next = 3;
+            _context.next = 6;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_platform_png__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
-          case 3:
+          case 6:
             platformImage = _context.sent;
-            _context.next = 6;
+            _context.next = 9;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_platformSmallTall_png__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
-          case 6:
+          case 9:
             platformSmallTallImage = _context.sent;
-            _context.next = 9;
+            _context.next = 12;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_blockTri_png__WEBPACK_IMPORTED_MODULE_11__["default"]);
 
-          case 9:
+          case 12:
             blockTriImage = _context.sent;
-            _context.next = 12;
+            _context.next = 15;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_block_png__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-          case 12:
+          case 15:
             blockImage = _context.sent;
-            _context.next = 15;
+            _context.next = 18;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_lgPlatform_png__WEBPACK_IMPORTED_MODULE_13__["default"]);
 
-          case 15:
+          case 18:
             lgPlatformImage = _context.sent;
-            _context.next = 18;
+            _context.next = 21;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_tPlatform_png__WEBPACK_IMPORTED_MODULE_14__["default"]);
 
-          case 18:
+          case 21:
             tPlatformImage = _context.sent;
-            _context.next = 21;
+            _context.next = 24;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_xtPlatform_png__WEBPACK_IMPORTED_MODULE_15__["default"]);
 
-          case 21:
+          case 24:
             xtPlatformImage = _context.sent;
-            _context.next = 24;
+            _context.next = 27;
             return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_flagPole_png__WEBPACK_IMPORTED_MODULE_16__["default"]);
 
-          case 24:
+          case 27:
             flagPoleImage = _context.sent;
             flagPole = new GenericObject({
               x: 6968 + 600,
@@ -11147,7 +11204,7 @@ function _init() {
               }
             });
 
-          case 37:
+          case 40:
           case "end":
             return _context.stop();
         }
@@ -11155,6 +11212,139 @@ function _init() {
     }, _callee);
   }));
   return _init.apply(this, arguments);
+}
+
+function initLevel2() {
+  return _initLevel.apply(this, arguments);
+}
+
+function _initLevel() {
+  _initLevel = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default.a.mark(function _callee2() {
+    var mountains, goombaWidth, platformsMap, platformDistance;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            player = new Player();
+            keys = {
+              right: {
+                pressed: false
+              },
+              left: {
+                pressed: false
+              }
+            };
+            scrollOffset = 0;
+            game = {
+              disableUserInput: false
+            };
+            _context2.next = 6;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_blockTri_png__WEBPACK_IMPORTED_MODULE_11__["default"]);
+
+          case 6:
+            blockTriImage = _context2.sent;
+            _context2.next = 9;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_block_png__WEBPACK_IMPORTED_MODULE_10__["default"]);
+
+          case 9:
+            blockImage = _context2.sent;
+            _context2.next = 12;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_images_js__WEBPACK_IMPORTED_MODULE_36__["images"].levels[2].lgPlatform);
+
+          case 12:
+            lgPlatformImage = _context2.sent;
+            _context2.next = 15;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_tPlatform_png__WEBPACK_IMPORTED_MODULE_14__["default"]);
+
+          case 15:
+            tPlatformImage = _context2.sent;
+            _context2.next = 18;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_xtPlatform_png__WEBPACK_IMPORTED_MODULE_15__["default"]);
+
+          case 18:
+            xtPlatformImage = _context2.sent;
+            _context2.next = 21;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_img_flagPole_png__WEBPACK_IMPORTED_MODULE_16__["default"]);
+
+          case 21:
+            flagPoleImage = _context2.sent;
+            _context2.next = 24;
+            return Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImageAsync"])(_images_js__WEBPACK_IMPORTED_MODULE_36__["images"].levels[2].mountains);
+
+          case 24:
+            mountains = _context2.sent;
+            flagPole = new GenericObject({
+              x: 6968 + 600,
+              // x: 500,
+              y: canvas.height - lgPlatformImage.height - flagPoleImage.height,
+              image: flagPoleImage
+            });
+            fireFlowers = [];
+            player = new Player();
+            goombaWidth = 43.33;
+            goombas = [];
+            particles = [];
+            platforms = [];
+            genericObjects = [new GenericObject({
+              x: -1,
+              y: -1,
+              image: Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["createImage"])(_images_js__WEBPACK_IMPORTED_MODULE_36__["images"].levels[2].background)
+            }), new GenericObject({
+              x: -1,
+              y: canvas.height - mountains.height,
+              image: mountains
+            })];
+            scrollOffset = 0;
+            platformsMap = ['lg', 'md'];
+            platformDistance = 0;
+            platformsMap.forEach(function (symbol) {
+              switch (symbol) {
+                case 'lg':
+                  platforms.push(new Platform({
+                    x: platformDistance,
+                    y: canvas.height - lgPlatformImage.height,
+                    image: lgPlatformImage,
+                    block: true,
+                    text: platformDistance
+                  }));
+                  platformDistance += lgPlatformImage.width - 2;
+                  break;
+
+                case 'gap':
+                  platformDistance += 175;
+                  break;
+
+                case 't':
+                  platforms.push(new Platform({
+                    x: platformDistance,
+                    y: canvas.height - tPlatformImage.height,
+                    image: tPlatformImage,
+                    block: true
+                  }));
+                  platformDistance += tPlatformImage.width - 2;
+                  break;
+
+                case 'xt':
+                  platforms.push(new Platform({
+                    x: platformDistance,
+                    y: canvas.height - xtPlatformImage.height,
+                    image: xtPlatformImage,
+                    block: true,
+                    text: platformDistance
+                  }));
+                  platformDistance += xtPlatformImage.width - 2;
+                  break;
+              }
+            });
+
+          case 37:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _initLevel.apply(this, arguments);
 }
 
 function animate() {
@@ -11238,7 +11428,12 @@ function animate() {
         _audio_js__WEBPACK_IMPORTED_MODULE_35__["audio"].fireworkWhistle.play();
         if (increment === 3) clearInterval(intervalId);
         increment++;
-      }, 1000);
+      }, 1000); // switch to the next level
+
+      setTimeout(function () {
+        gravity = 1.5;
+        selectLevel(currentLevel + 1);
+      }, 5000);
     }
   } // mario obtains powerup
 
@@ -11318,7 +11513,7 @@ function animate() {
         }, 1000);
       } else if (!player.invincible) {
         _audio_js__WEBPACK_IMPORTED_MODULE_35__["audio"].die.play();
-        init();
+        selectLevel(currentLevel);
       }
     }
   });
@@ -11455,7 +11650,7 @@ function animate() {
 
   if (player.position.y > canvas.height) {
     _audio_js__WEBPACK_IMPORTED_MODULE_35__["audio"].die.play();
-    init();
+    selectLevel(currentLevel);
   } // sprite switching
 
 
@@ -11485,7 +11680,9 @@ function animate() {
   }
 }
 
-init();
+selectLevel(1); // init()
+// initLevel2()
+
 animate();
 addEventListener('keydown', function (_ref6) {
   var keyCode = _ref6.keyCode;
@@ -11563,6 +11760,37 @@ addEventListener('keyup', function (_ref7) {
       break;
   }
 });
+
+/***/ }),
+
+/***/ "./src/js/images.js":
+/*!**************************!*\
+  !*** ./src/js/images.js ***!
+  \**************************/
+/*! exports provided: images */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "images", function() { return images; });
+/* harmony import */ var _img_level2_background_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/level2/background.png */ "./src/img/level2/background.png");
+/* harmony import */ var _img_level2_mountains_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/level2/mountains.png */ "./src/img/level2/mountains.png");
+/* harmony import */ var _img_level2_lgPlatform_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/level2/lgPlatform.png */ "./src/img/level2/lgPlatform.png");
+
+
+
+var images = {
+  levels: {
+    1: {
+      background: ''
+    },
+    2: {
+      background: _img_level2_background_png__WEBPACK_IMPORTED_MODULE_0__["default"],
+      mountains: _img_level2_mountains_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+      lgPlatform: _img_level2_lgPlatform_png__WEBPACK_IMPORTED_MODULE_2__["default"]
+    }
+  }
+};
 
 /***/ }),
 

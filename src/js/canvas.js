@@ -45,6 +45,7 @@ import spriteFireFlower from '../img/spriteFireFlower.png'
 
 import spriteGoomba from '../img/spriteGoomba.png'
 import { audio } from './audio.js'
+import { images } from './images.js'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -413,21 +414,37 @@ let particles = []
 let fireFlowers = []
 
 let lastKey
-const keys = {
-  right: {
-    pressed: false
-  },
-  left: {
-    pressed: false
-  }
-}
+let keys
 
-let scrollOffset = 0
+let scrollOffset
 let flagPole
 let flagPoleImage
 let game
+let currentLevel = 1
+
+function selectLevel(currentLevel) {
+  switch (currentLevel) {
+    case 1:
+      init()
+      break
+    case 2:
+      initLevel2()
+      break
+  }
+}
 
 async function init() {
+  player = new Player()
+  keys = {
+    right: {
+      pressed: false
+    },
+    left: {
+      pressed: false
+    }
+  }
+  scrollOffset = 0
+
   game = {
     disableUserInput: false
   }
@@ -741,6 +758,118 @@ async function init() {
   })
 }
 
+async function initLevel2() {
+  player = new Player()
+  keys = {
+    right: {
+      pressed: false
+    },
+    left: {
+      pressed: false
+    }
+  }
+  scrollOffset = 0
+
+  game = {
+    disableUserInput: false
+  }
+
+  blockTriImage = await createImageAsync(blockTri)
+  blockImage = await createImageAsync(block)
+  lgPlatformImage = await createImageAsync(images.levels[2].lgPlatform)
+  tPlatformImage = await createImageAsync(tPlatform)
+  xtPlatformImage = await createImageAsync(xtPlatform)
+  flagPoleImage = await createImageAsync(flagPoleSprite)
+  const mountains = await createImageAsync(images.levels[2].mountains)
+
+  flagPole = new GenericObject({
+    x: 6968 + 600,
+    // x: 500,
+    y: canvas.height - lgPlatformImage.height - flagPoleImage.height,
+    image: flagPoleImage
+  })
+
+  fireFlowers = []
+
+  player = new Player()
+
+  const goombaWidth = 43.33
+  goombas = []
+  particles = []
+  platforms = []
+  genericObjects = [
+    new GenericObject({
+      x: -1,
+      y: -1,
+      image: createImage(images.levels[2].background)
+    }),
+    new GenericObject({
+      x: -1,
+      y: canvas.height - mountains.height,
+      image: mountains
+    })
+  ]
+
+  scrollOffset = 0
+
+  const platformsMap = ['lg', 'md']
+
+  let platformDistance = 0
+
+  platformsMap.forEach((symbol) => {
+    switch (symbol) {
+      case 'lg':
+        platforms.push(
+          new Platform({
+            x: platformDistance,
+            y: canvas.height - lgPlatformImage.height,
+            image: lgPlatformImage,
+            block: true,
+            text: platformDistance
+          })
+        )
+
+        platformDistance += lgPlatformImage.width - 2
+
+        break
+
+      case 'gap':
+        platformDistance += 175
+
+        break
+
+      case 't':
+        platforms.push(
+          new Platform({
+            x: platformDistance,
+            y: canvas.height - tPlatformImage.height,
+            image: tPlatformImage,
+            block: true
+          })
+        )
+
+        platformDistance += tPlatformImage.width - 2
+
+        break
+
+      case 'xt':
+        platforms.push(
+          new Platform({
+            x: platformDistance,
+            y: canvas.height - xtPlatformImage.height,
+            image: xtPlatformImage,
+            block: true,
+            text: platformDistance
+          })
+        )
+
+        platformDistance += xtPlatformImage.width - 2
+
+        break
+    }
+  })
+}
+
 function animate() {
   requestAnimationFrame(animate)
   c.fillStyle = 'white'
@@ -849,6 +978,12 @@ function animate() {
 
         increment++
       }, 1000)
+
+      // switch to the next level
+      setTimeout(() => {
+        gravity = 1.5
+        selectLevel(currentLevel + 1)
+      }, 5000)
     }
   }
 
@@ -949,7 +1084,7 @@ function animate() {
         }, 1000)
       } else if (!player.invincible) {
         audio.die.play()
-        init()
+        selectLevel(currentLevel)
       }
     }
   })
@@ -1131,7 +1266,7 @@ function animate() {
   // lose condition
   if (player.position.y > canvas.height) {
     audio.die.play()
-    init()
+    selectLevel(currentLevel)
   }
 
   // sprite switching
@@ -1193,7 +1328,9 @@ function animate() {
   }
 }
 
-init()
+selectLevel(1)
+// init()
+// initLevel2()
 animate()
 
 addEventListener('keydown', ({ keyCode }) => {
