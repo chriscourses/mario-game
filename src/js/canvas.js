@@ -423,6 +423,7 @@ let game
 let currentLevel = 1
 
 function selectLevel(currentLevel) {
+  if (!audio.musicLevel1.playing()) audio.musicLevel1.play()
   switch (currentLevel) {
     case 1:
       init()
@@ -781,22 +782,169 @@ async function initLevel2() {
   xtPlatformImage = await createImageAsync(xtPlatform)
   flagPoleImage = await createImageAsync(flagPoleSprite)
   const mountains = await createImageAsync(images.levels[2].mountains)
+  const mdPlatformImage = await createImageAsync(images.levels[2].mdPlatform)
 
   flagPole = new GenericObject({
-    x: 6968 + 600,
+    x: 7680,
     // x: 500,
     y: canvas.height - lgPlatformImage.height - flagPoleImage.height,
     image: flagPoleImage
   })
 
-  fireFlowers = []
+  fireFlowers = [
+    new FireFlower({
+      position: {
+        x: 4734 - 28,
+        y: 100
+      },
+      velocity: {
+        x: 0,
+        y: 0
+      }
+    })
+  ]
 
   player = new Player()
 
   const goombaWidth = 43.33
-  goombas = []
+  goombas = [
+    new Goomba({
+      // single block goomba
+      position: {
+        x: 903 + mdPlatformImage.width - goombaWidth,
+        y: 100
+      },
+      velocity: {
+        x: -2,
+        y: 0
+      },
+      distance: {
+        limit: 700,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      // single block goomba
+      position: {
+        x:
+          1878 +
+          lgPlatformImage.width +
+          155 +
+          200 +
+          200 +
+          200 +
+          blockImage.width / 2 -
+          goombaWidth / 2,
+        y: 100
+      },
+      velocity: {
+        x: 0,
+        y: 0
+      },
+      distance: {
+        limit: 0,
+        traveled: 0
+      }
+    }),
+    new Goomba({
+      position: {
+        x: 3831 + lgPlatformImage.width - goombaWidth,
+        y: 100
+      },
+      velocity: {
+        x: -1,
+        y: 0
+      },
+      distance: {
+        limit: lgPlatformImage.width - goombaWidth,
+        traveled: 0
+      }
+    }),
+
+    new Goomba({
+      position: {
+        x: 4734,
+        y: 100
+      },
+      velocity: {
+        x: 1,
+        y: 0
+      },
+      distance: {
+        limit: lgPlatformImage.width - goombaWidth,
+        traveled: 0
+      }
+    })
+  ]
   particles = []
-  platforms = []
+  platforms = [
+    new Platform({
+      x: 903 + mdPlatformImage.width + 115,
+      y: 300,
+      image: blockTriImage,
+      block: true
+    }),
+    new Platform({
+      x: 903 + mdPlatformImage.width + 115 + blockTriImage.width,
+      y: 300,
+      image: blockTriImage,
+      block: true
+    }),
+    new Platform({
+      x: 1878 + lgPlatformImage.width + 175,
+      y: 360,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 1878 + lgPlatformImage.width + 155 + 200,
+      y: 300,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 1878 + lgPlatformImage.width + 155 + 200 + 200,
+      y: 330,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 1878 + lgPlatformImage.width + 155 + 200 + 200 + 200,
+      y: 240,
+      image: blockImage,
+      block: true
+    }),
+    new Platform({
+      x: 4734 - mdPlatformImage.width / 2,
+      y: canvas.height - lgPlatformImage.height - mdPlatformImage.height,
+      image: mdPlatformImage
+    }),
+    new Platform({
+      x: 5987,
+      y: canvas.height - lgPlatformImage.height - mdPlatformImage.height,
+      image: mdPlatformImage
+    }),
+    new Platform({
+      x: 5987,
+      y: canvas.height - lgPlatformImage.height - mdPlatformImage.height * 2,
+      image: mdPlatformImage
+    }),
+    new Platform({
+      x: 6787,
+      y: canvas.height - lgPlatformImage.height - mdPlatformImage.height,
+      image: mdPlatformImage
+    }),
+    new Platform({
+      x: 6787,
+      y: canvas.height - lgPlatformImage.height - mdPlatformImage.height * 2,
+      image: mdPlatformImage
+    }),
+    new Platform({
+      x: 6787,
+      y: canvas.height - lgPlatformImage.height - mdPlatformImage.height * 3,
+      image: mdPlatformImage
+    })
+  ]
   genericObjects = [
     new GenericObject({
       x: -1,
@@ -812,16 +960,54 @@ async function initLevel2() {
 
   scrollOffset = 0
 
-  const platformsMap = ['lg', 'md']
+  const platformsMap = [
+    'lg',
+    'md',
+    'gap',
+    'gap',
+    'gap',
+    'lg',
+    'gap',
+    'gap',
+    'gap',
+    'gap',
+    'gap',
+    'gap',
+    'lg',
+    'lg',
+    'gap',
+    'gap',
+    'md',
+    'gap',
+    'gap',
+    'md',
+    'gap',
+    'gap',
+    'lg'
+  ]
 
   let platformDistance = 0
 
   platformsMap.forEach((symbol) => {
     switch (symbol) {
-      case 'lg':
+      case 'md':
         platforms.push(
           new Platform({
             x: platformDistance,
+            y: canvas.height - mdPlatformImage.height,
+            image: mdPlatformImage,
+            block: true,
+            text: platformDistance
+          })
+        )
+
+        platformDistance += mdPlatformImage.width - 3
+
+        break
+      case 'lg':
+        platforms.push(
+          new Platform({
+            x: platformDistance - 2,
             y: canvas.height - lgPlatformImage.height,
             image: lgPlatformImage,
             block: true,
@@ -829,7 +1015,7 @@ async function initLevel2() {
           })
         )
 
-        platformDistance += lgPlatformImage.width - 2
+        platformDistance += lgPlatformImage.width - 3
 
         break
 
@@ -981,9 +1167,10 @@ function animate() {
 
       // switch to the next level
       setTimeout(() => {
+        currentLevel++
         gravity = 1.5
-        selectLevel(currentLevel + 1)
-      }, 5000)
+        selectLevel(currentLevel)
+      }, 8000)
     }
   }
 
@@ -995,6 +1182,7 @@ function animate() {
         object2: fireFlower
       })
     ) {
+      audio.obtainPowerUp.play()
       player.powerUps.fireFlower = true
       setTimeout(() => {
         fireFlowers.splice(i, 1)
@@ -1006,38 +1194,37 @@ function animate() {
     goomba.update()
 
     // remove goomba on fireball hit
-    particles
-      .filter((particle) => particle.fireball)
-      .forEach((particle, particleIndex) => {
-        if (
-          particle.position.x + particle.radius >= goomba.position.x &&
-          particle.position.y + particle.radius >= goomba.position.y &&
-          particle.position.x - particle.radius <=
-            goomba.position.x + goomba.width &&
-          particle.position.y - particle.radius <=
-            goomba.position.y + goomba.height
-        ) {
-          for (let i = 0; i < 50; i++) {
-            particles.push(
-              new Particle({
-                position: {
-                  x: goomba.position.x + goomba.width / 2,
-                  y: goomba.position.y + goomba.height / 2
-                },
-                velocity: {
-                  x: (Math.random() - 0.5) * 7,
-                  y: (Math.random() - 0.5) * 15
-                },
-                radius: Math.random() * 3
-              })
-            )
-          }
-          setTimeout(() => {
-            goombas.splice(index, 1)
-            particles.splice(particleIndex, 1)
-          }, 0)
+    particles.forEach((particle, particleIndex) => {
+      if (
+        particle.fireball &&
+        particle.position.x + particle.radius >= goomba.position.x &&
+        particle.position.y + particle.radius >= goomba.position.y &&
+        particle.position.x - particle.radius <=
+          goomba.position.x + goomba.width &&
+        particle.position.y - particle.radius <=
+          goomba.position.y + goomba.height
+      ) {
+        for (let i = 0; i < 50; i++) {
+          particles.push(
+            new Particle({
+              position: {
+                x: goomba.position.x + goomba.width / 2,
+                y: goomba.position.y + goomba.height / 2
+              },
+              velocity: {
+                x: (Math.random() - 0.5) * 7,
+                y: (Math.random() - 0.5) * 15
+              },
+              radius: Math.random() * 3
+            })
+          )
         }
-      })
+        setTimeout(() => {
+          goombas.splice(index, 1)
+          particles.splice(particleIndex, 1)
+        }, 0)
+      }
+    })
 
     // goomba stomp squish / squash
     if (
