@@ -57,6 +57,7 @@ let gravity = 1.5
 
 class Player {
   constructor() {
+    this.shooting = false
     this.speed = 10
     this.position = {
       x: 100,
@@ -96,6 +97,12 @@ class Player {
         fireFlower: {
           right: createImage(spriteFireFlowerJumpRight),
           left: createImage(spriteFireFlowerJumpLeft)
+        }
+      },
+      shoot: {
+        fireFlower: {
+          right: createImage(images.mario.shoot.fireFlower.right),
+          left: createImage(images.mario.shoot.fireFlower.left)
         }
       }
     }
@@ -152,7 +159,9 @@ class Player {
       currentSprite === sprites.jump.right ||
       currentSprite === sprites.jump.left ||
       currentSprite === sprites.jump.fireFlower.right ||
-      currentSprite === sprites.jump.fireFlower.left
+      currentSprite === sprites.jump.fireFlower.left ||
+      currentSprite === sprites.shoot.fireFlower.left ||
+      currentSprite === sprites.shoot.fireFlower.right
     )
       this.frames = 0
 
@@ -1457,6 +1466,17 @@ function animate() {
   }
 
   // sprite switching
+
+  if (player.shooting) {
+    player.currentSprite = player.sprites.shoot.fireFlower.right
+
+    if (lastKey === 'left')
+      player.currentSprite = player.sprites.shoot.fireFlower.left
+
+    return
+  }
+
+  // sprite jump
   if (player.velocity.y !== 0) return
 
   if (
@@ -1513,7 +1533,7 @@ function animate() {
   ) {
     player.currentSprite = player.sprites.stand.fireFlower.right
   }
-}
+} // animation loop ends
 
 selectLevel(1)
 // init()
@@ -1563,6 +1583,12 @@ addEventListener('keydown', ({ keyCode }) => {
       console.log('space')
 
       if (!player.powerUps.fireFlower) return
+
+      player.shooting = true
+
+      setTimeout(() => {
+        player.shooting = false
+      }, 100)
 
       audio.fireFlowerShot.play()
 
